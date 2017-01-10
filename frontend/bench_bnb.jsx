@@ -7,10 +7,14 @@ import { requestLogin } from './actions/auth_actions';
 
 $(() => {
   const root = document.getElementById('root');
-  const store = configureStore();
+  let store;
 
-  window.store = store;
-  window.login = requestLogin;
+  if (window.currentUser) {
+    const preloadedState = { session: { currentUser: window.currentUser }};
+    store = configureStore(preloadedState);
+  } else {
+    store = configureStore();
+  }
 
   ReactDOM.render(<Root store={ store } />, root);
 });
