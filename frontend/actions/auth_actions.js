@@ -31,7 +31,7 @@ export const requestLogin = user => dispatch => {
   return AUTH.login(user).then(
     currentUser => dispatch(receiveCurrentUser(currentUser))
   ).fail(
-    error => dispatch(receiveErrors)
+    error => dispatch(receiveErrors(error.responseJSON))
   );
 };
 
@@ -45,6 +45,6 @@ export const requestSignup = user => dispatch => {
   return AUTH.signup(user).then(
     currentUser => dispatch(receiveCurrentUser(currentUser))
   ).fail(
-    error => dispatch(receiveErrors)
+    error => dispatch(receiveErrors(error.responseJSON))
   );
 };
